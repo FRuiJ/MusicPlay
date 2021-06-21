@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2">
+
+
+    <RelativeLayout
+        android:id="@+id/main_rl_bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FAED81">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#29260E" />
+        <!--分界线-->
+        <ImageView
+            android:id="@+id/main_iv_bottom_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/a1"
+            android:src="@mipmap/icon_song" />
+        <!--专辑图片样式-->
+        <TextView
+            android:id="@+id/main_tv_bottom_song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/main_iv_bottom_icon"
+            android:text="告白气球"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <!--歌曲名字-->
+        <TextView
+            android:id="@+id/main_tv_bottom_singer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_tv_bottom_song"
+            android:layout_alignLeft="@+id/main_tv_bottom_song"
+            android:layout_marginTop="10dp"
+            android:text="周杰伦"
+            android:textSize="13sp" />
+        <!--歌手名字-->
+        <ImageView
+            android:id="@+id/main_iv_bottom_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/icon_next" />
+
+        <ImageView
+            android:id="@+id/main_iv_bottom_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/main_iv_bottom_next"
+            android:src="@drawable/icon_play" />
+
+        <ImageView
+            android:id="@+id/main_iv_bottom_last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/main_iv_bottom_play"
+            android:src="@drawable/icon_last" />
+    </RelativeLayout>
+    <!--底部工具栏-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rv_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_rl_bottom_toolbar">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <!--    歌曲目录-->
+</RelativeLayout>
