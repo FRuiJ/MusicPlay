@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // 记录音乐播放的位置
     int currentPlayPosition = -1;
-
+    int currentPausePositionInSong = 0;
     MediaPlayer mediaPlayer;
 
     @Override
@@ -82,25 +82,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void playMusic() {
         /*播放*/
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            try {
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (currentPausePositionInSong == 0) {
+                try {
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                mediaPlayer.seekTo(currentPausePositionInSong);
             }
+
             playIv.setImageResource(R.drawable.zanting);
         }
     }
 
     private void pauseMusic() {
+        /*暂停播放音乐*/
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-
+            currentPausePositionInSong = mediaPlayer.getCurrentPosition();
+            mediaPlayer.pause();
+            playIv.setImageResource(R.drawable.bofang);
         }
     }
 
     private void stopMusic() {
         /*停止音乐函数*/
         if (mediaPlayer != null) {
+            currentPausePositionInSong = 0;
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
             mediaPlayer.stop();
@@ -158,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (mediaPlayer.isPlaying()) {
                     pauseMusic();
                 } else {
-
+                    playMusic();
                 }
                 break;
             case R.id.main_iv_bottom_last:
