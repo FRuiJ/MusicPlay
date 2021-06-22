@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="120"
+            android:text=""
             android:textSize="24dp" />
         <!--编号-->
         <TextView
@@ -31,7 +31,7 @@
             android:layout_toRightOf="@+id/item_tv_num"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="玫瑰花的葬礼"
+            android:text=""
             android:textSize="20dp"
             android:textStyle="bold" />
         <!--歌名-->
@@ -42,7 +42,7 @@
             android:layout_below="@+id/item_tv_song"
             android:layout_alignLeft="@+id/item_tv_song"
             android:layout_marginTop="10dp"
-            android:text="许嵩" />
+            android:text="" />
         <!--歌手名-->
         <TextView
             android:id="@+id/item_tv_album"
@@ -51,7 +51,7 @@
             android:layout_alignTop="@+id/item_tv_singer"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/item_tv_singer"
-            android:text="专辑名称" />
+            android:text="" />
         <!--歌曲长度-->
         <TextView
             android:id="@+id/item_tv_time"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_tv_album"
             android:layout_alignParentRight="true"
-            android:text="4:20"
+            android:text=""
             android:textSize="12sp" />
     </RelativeLayout>
 

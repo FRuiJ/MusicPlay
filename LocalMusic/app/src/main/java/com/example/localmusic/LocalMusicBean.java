@@ -1,7 +1,7 @@
 package com.example.localmusic;
 
 public class LocalMusicBean {
-    private int id;
+    private String id;
     private String song;
     private String singer;
     private String album;
@@ -11,7 +11,7 @@ public class LocalMusicBean {
     public LocalMusicBean() {
     }
 
-    public LocalMusicBean(int id, String song, String singer, String album, String time, String path) {
+    public LocalMusicBean(String id, String song, String singer, String album, String time, String path) {
         this.id = id;
         this.song = song;
         this.singer = singer;
@@ -20,11 +20,11 @@ public class LocalMusicBean {
         this.path = path;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
