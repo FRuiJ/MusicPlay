@@ -9,7 +9,8 @@
     app:cardBackgroundColor="@color/colorGrey"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
-    app:contentPadding="10dp">
+    app:contentPadding="10dp"
+    android:backgroundTint="#FFFFFF">
 
     <RelativeLayout
         android:layout_width="match_parent"

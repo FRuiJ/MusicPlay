@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,11 +31,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<LocalMusicBean> mDatas;
     private LocalMusicAdapter adapter;
 
+    // 记录音乐播放的位置
+    int currentPlayPosition = -1;
+
+    MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        mediaPlayer = new MediaPlayer();
         mDatas = new ArrayList<>();
 //        适配器对象
         adapter = new LocalMusicAdapter(this, mDatas);
@@ -40,8 +49,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        设置布局管理器
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         menuRv.setLayoutManager(layoutManager);
-
+//        加载本地数据源
         loadLocalMusicData();
+//        设置每一项点击事件
+        setEventListener();
+    }
+
+    private void setEventListener() {
+//        设置每一项的点击事件
+        adapter.setOnItemClickListener(new LocalMusicAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View view, int position) {
+                currentPlayPosition = position;
+                LocalMusicBean musicBean = mDatas.get(position);
+//                设置底部显示的歌手名称和歌曲名字
+                singerTv.setText(musicBean.getSinger());
+                songTv.setText(musicBean.getSong());
+                stopMusic();
+//                重置多媒体播放器
+                mediaPlayer.reset();
+//                设置新的路径
+                try {
+                    mediaPlayer.setDataSource(musicBean.getPath());
+                    playMusic();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void playMusic() {
+        /*播放*/
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            try {
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            playIv.setImageResource(R.drawable.zanting);
+        }
+    }
+
+    private void pauseMusic() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+
+        }
+    }
+
+    private void stopMusic() {
+        /*停止音乐函数*/
+        if (mediaPlayer != null) {
+            mediaPlayer.pause();
+            mediaPlayer.seekTo(0);
+            mediaPlayer.stop();
+            playIv.setImageResource(R.drawable.bofang);
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopMusic();
     }
 
     private void loadLocalMusicData() {
@@ -79,7 +150,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.main_iv_bottom_play:
+                /*正在播放，暂停；没有播放，无反应； 暂停中，播放*/
+                if (currentPlayPosition == -1) {
+                    Toast.makeText(this, "请先播放音乐", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (mediaPlayer.isPlaying()) {
+                    pauseMusic();
+                } else {
 
+                }
                 break;
             case R.id.main_iv_bottom_last:
 
